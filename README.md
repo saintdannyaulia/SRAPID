@@ -230,9 +230,3 @@ Untuk melihat log error secara detail:
 - **Gemini free tier:** 1.500 request/hari, 15 request/menit untuk Gemini 1.5 Flash
 - **Apps Script:** Runtime maksimal 6 menit per eksekusi (lebih dari cukup untuk use case ini)
 - **Konteks:** Sistem tidak menyimpan riwayat percakapan — setiap pertanyaan diproses secara independen
-
----
-
-## Lisensi
-
-MIT License — bebas digunakan, dimodifikasi, dan didistribusikan.
