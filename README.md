@@ -1,4 +1,4 @@
-# 🤖 Auto-Reply System using Google Form + Gemini + Gmail
+# 🤖 Smart Auto-Reply using Google Form + Gemini + Gmail
 
 [![Java](https://img.shields.io/badge/Javascript-App-yellow?logo=javascript)](https://javascript.com)
 
