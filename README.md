@@ -1,4 +1,4 @@
-# 🤖 AI Auto-Reply System — Google Form + Gemini + Gmail
+# 🤖 Auto-Reply System using Google Form + Gemini + Gmail
 
 Sistem otomatis yang menjawab pertanyaan *machine learning* dari Google Form menggunakan **Gemini AI**, lalu mengirimkan balasan ke email pengguna dalam waktu kurang dari 1 menit — seluruhnya dijalankan di atas **Google Apps Script**, tanpa server.
 
