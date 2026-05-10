@@ -2,9 +2,9 @@
 
 [![Java](https://img.shields.io/badge/Javascript-App-yellow?logo=javascript)](https://javascript.com)
 
-Sistem otomatis yang menjawab pertanyaan *machine learning* dari Google Form menggunakan **Gemini AI**, lalu mengirimkan balasan ke email pengguna dalam waktu kurang dari 1 menit — seluruhnya dijalankan di atas **Google Apps Script**, tanpa server. 
-
-*Merupakan pertanyaan pada tes METI Government of Japan for AI and Tech Internship tahun 2025*
+> Sistem otomatis yang menjawab pertanyaan *machine learning* dari Google Form menggunakan **Gemini AI**, lalu mengirimkan balasan ke email pengguna dalam waktu kurang dari 1 menit — seluruhnya dijalankan di atas **Google Apps Script**, tanpa server. 
+>
+> *Merupakan pertanyaan pada tes METI Government of Japan for AI and Tech Internship tahun 2025*
 
 ---
 
