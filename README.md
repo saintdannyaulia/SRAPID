@@ -235,4 +235,8 @@ Untuk melihat log error secara lengkap:
 
 ---
 
-<p align="center">Dikembangkan oleh · Danny Aulia · Said Hasan Hanafiah · Noah Von Nobelius · Arvian Raveindra Pradana</p>
+<h3 style="text-align:center;">
+  <b>Pengembangan dari tim StarLive SAINT</b>
+</h3>
+
+<p align="center">Danny Aulia · Said Hasan Hanafiah · Noah Von Nobelius · Arvian Raveindra Pradana</p>
