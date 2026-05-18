@@ -232,3 +232,7 @@ Untuk melihat log error secara lengkap:
 - **Gemini free tier:** 1.500 request per hari, 15 request per menit untuk Gemini 1.5 Flash
 - **Apps Script:** Batas waktu eksekusi maksimal 6 menit per sesi (memadai untuk kasus penggunaan ini)
 - **Konteks percakapan:** Sistem tidak menyimpan riwayat percakapan — setiap pertanyaan diproses secara independen
+
+---
+
+<p align="center">Dikembangkan oleh · Danny Aulia · Said Hasan Hanafiah · Noah Von Nobelius · Arvian Raveindra Pradana</p>
