@@ -1,84 +1,150 @@
 # 🤖 StarLive Response Automation via Prompt Integrated Data
 
-[![Java](https://img.shields.io/badge/Javascript-App-yellow?logo=javascript)](https://javascript.com)
-
-> Sistem otomatis untuk menjawab pertanyaan *machine learning* dari Google Form menggunakan **Gemini AI**, lalu mengirimkan balasan ke email pengguna dalam waktu kurang dari 1 menit — seluruhnya dijalankan di atas **Google Apps Script**, tanpa server.
->
-> *Merupakan pertanyaan pada tes METI Government of Japan for AI and Tech Internship tahun 2025*
+[![JavaScript](https://img.shields.io/badge/Javascript-App-yellow?logo=javascript)](https://javascript.com)
+[![Platform](https://img.shields.io/badge/Platform-Google%20Apps%20Script-blue?logo=google)](https://script.google.com)
+[![AI](https://img.shields.io/badge/AI-Gemini%201.5%20Flash-orange?logo=google)](https://aistudio.google.com)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
 ## Daftar Isi
 
-- [Fitur](#fitur)
-- [Cara Kerja](#cara-kerja)
-- [Prasyarat](#prasyarat)
-- [Panduan Setup](#panduan-setup)
-  - [1. Dapatkan Gemini API Key](#1-dapatkan-gemini-api-key)
-  - [2. Buat Google Form](#2-buat-google-form)
-  - [3. Pasang Apps Script](#3-pasang-apps-script)
-  - [4. Aktifkan Trigger Otomatis](#4-aktifkan-trigger-otomatis)
-  - [5. Uji Sistem](#5-uji-sistem)
-  - [6. Bagikan Tautan Form](#6-bagikan-tautan-form)
-- [Struktur Kode](#struktur-kode)
-- [Konfigurasi](#konfigurasi)
-- [Pemecahan Masalah](#pemecahan-masalah)
-- [Batasan](#batasan)
-- [Lisensi](#lisensi)
+- [Overview](#overview)
+- [Features & Tech Stack](#features--tech-stack)
+- [System Workflow](#system-workflow)
+- [User Guide](#user-guide)
+  - [Equipment](#equipment)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+  - [Troubleshooting](#troubleshooting)
+- [Development Notes](#development-notes)
+  - [Limitations](#limitations)
+  - [Future Development](#future-development)
+- [Author](#author)
 
 ---
 
-## Fitur
+## Overview
 
-- **Respons otomatis** — setiap pengiriman form memicu jawaban AI secara langsung
-- **Didukung Gemini 1.5 Flash** — model cepat dan tersedia secara gratis melalui Google AI Studio
-- **Email berformat HTML** — balasan ditampilkan secara rapi dengan sorotan pertanyaan dan jawaban
-- **Tanpa server** — berjalan 100% di Google Apps Script, tanpa kebutuhan hosting
-- **Latensi kurang dari 1 menit** — trigger `onFormSubmit` berjalan secara real-time
-- **Tanpa biaya** — memanfaatkan free tier Google AI Studio dan Gmail
+Proyek ini dikembangkan sebagai solusi untuk tes seleksi **METI Government of Japan AI and Tech Internship 2025**. Sistem dirancang untuk merespons pertanyaan seputar *machine learning* secara otomatis tanpa memerlukan infrastruktur server maupun biaya hosting — seluruhnya berjalan di atas ekosistem Google menggunakan **Gemini AI** dan **Google Apps Script**.
+
+Setiap kali pengguna mengisi Google Form, sistem langsung memproses pertanyaan dan mengirimkan jawaban berformat HTML ke alamat email yang telah diisi, dalam waktu kurang dari 1 menit.
+
+> **📝 Notes**
+> <!-- Tambahkan catatan tambahan, konteks proyek, atau informasi relevan lainnya di sini -->
+> <!-- Contoh: versi, kondisi khusus, atau hal yang perlu diketahui pembaca sebelum lanjut -->
 
 ---
 
-## Cara Kerja
+## Features & Tech Stack
+
+### Features
+
+- **Respons otomatis real-time** — trigger `onFormSubmit` aktif setiap kali form dikirimkan
+- **Email berformat HTML** — balasan ditampilkan rapi dengan sorotan pertanyaan dan jawaban
+- **Tanpa server & tanpa biaya** — berjalan 100% di Google Apps Script dengan free tier
+- **Latensi < 1 menit** — dari pengiriman form hingga email masuk inbox
+
+### Tech Stack
+
+| Komponen | Teknologi |
+|---|---|
+| Runtime | Google Apps Script (JavaScript) |
+| AI Model | Gemini 1.5 Flash via Google AI Studio API |
+| Input | Google Forms |
+| Output | Gmail (GmailApp) |
+| Hosting | Serverless (Google Cloud internally) |
+
+---
+
+## System Workflow
+
+### Flowchart
 
 ```
-User submit form  →  Apps Script trigger  →  Gemini API  →  Gmail reply
- (email + question)     (onFormSubmit)      (generate AI answer)   (< 1 menit)
+┌─────────────────┐
+│  User mengisi   │
+│  Google Form    │
+│ (email + soal)  │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  Trigger aktif  │
+│  onFormSubmit   │
+│  (Apps Script)  │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  Kirim prompt   │
+│  ke Gemini API  │
+│  (callGemini)   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  Gemini          │
+│  menghasilkan   │
+│  jawaban AI     │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  Kirim email    │
+│  HTML balasan   │
+│  via GmailApp   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  Email masuk    │
+│  inbox user     │
+│  < 1 menit ✅   │
+└─────────────────┘
 ```
 
-1. Pengguna mengisi Google Form dengan alamat email dan pertanyaan machine learning.
-2. Trigger `onFormSubmit` di Apps Script aktif secara otomatis.
-3. Script mengirimkan pertanyaan ke Gemini API dengan prompt terstruktur.
-4. Gemini menghasilkan jawaban ringkas dalam bahasa Indonesia.
-5. Script mengirimkan email balasan berformat HTML ke alamat yang telah diisi pengguna.
+### Penjelasan
+
+| Langkah | Proses | Keterangan |
+|---|---|---|
+| 1 | User submit form | Mengisi `email` dan `pertanyaan` di Google Form |
+| 2 | Trigger `onFormSubmit` | Apps Script menangkap event pengiriman form secara otomatis |
+| 3 | `callGemini(question)` | Pertanyaan dikirim ke endpoint Gemini 1.5 Flash dengan prompt terstruktur |
+| 4 | Generate jawaban | Gemini menghasilkan jawaban ringkas dalam Bahasa Indonesia |
+| 5 | `sendReplyEmail()` | Jawaban dikemas dalam template HTML dan dikirim via GmailApp |
 
 ---
 
-## Prasyarat
+## User Guide
 
-- Akun Google (untuk Google Form, Apps Script, dan Gmail)
-- API key dari [Google AI Studio](https://aistudio.google.com/app/apikey) (gratis)
+### Equipment
+
+Pastikan hal berikut tersedia sebelum memulai:
+
+- Akun Google aktif (untuk Google Form, Apps Script, dan Gmail)
+- API key dari [Google AI Studio](https://aistudio.google.com/app/apikey) — gratis, tidak perlu kartu kredit
 - Tidak diperlukan server, hosting, maupun dependensi eksternal
 
 ---
 
-## Panduan Setup
+### Installation
 
-### 1. Dapatkan Gemini API Key
+#### 1. Dapatkan Gemini API Key
 
-1. Buka [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey).
-2. Masuk menggunakan akun Google.
-3. Klik **"Create API key"**, lalu pilih atau buat project Google Cloud.
-4. Salin API key yang dihasilkan — akan digunakan pada langkah berikutnya.
+1. Buka [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+2. Masuk dengan akun Google, lalu klik **"Create API key"**
+3. Pilih atau buat project Google Cloud
+4. Salin API key — akan digunakan pada langkah berikutnya
 
-> **Catatan:** Free tier Google AI Studio mencakup 1.500 request per hari untuk Gemini 1.5 Flash, yang sudah memadai untuk penggunaan personal.
+> Free tier mencakup **1.500 request/hari** untuk Gemini 1.5 Flash.
 
 ---
 
-### 2. Buat Google Form
+#### 2. Buat Google Form
 
-1. Buka [forms.google.com](https://forms.google.com), lalu klik **"Blank form"**.
-2. Isi judul form: `Form-[Nama]` (contoh: `Form-Budi`).
+1. Buka [forms.google.com](https://forms.google.com) → **"Blank form"**
+2. Isi judul: `Form-[Nama]` (contoh: `Form-Budi`)
 3. Tambahkan dua pertanyaan berikut:
 
 | # | Judul Pertanyaan | Tipe |
@@ -86,122 +152,80 @@ User submit form  →  Apps Script trigger  →  Gemini API  →  Gmail reply
 | 1 | `Your email` | Short answer |
 | 2 | `Question` | Paragraph |
 
-> **Penting:** Nama field harus **persis sama** dengan yang tercantum di kode (`Your email` dan `Question`) agar `namedValues` dapat terbaca dengan benar.
-
-4. Klik ikon **Mata** (Preview) untuk meninjau tampilan form.
+> **Penting:** Nama field harus **persis sama** agar `namedValues` dapat terbaca dengan benar oleh script.
 
 ---
 
-### 3. Pasang Apps Script
+#### 3. Pasang Apps Script
 
-Terdapat dua cara untuk menghubungkan script ke form:
+**Cara yang direkomendasikan — langsung dari Google Form:**
 
-**Cara A — Langsung dari Google Form (direkomendasikan):**
-1. Di halaman form, klik ikon **⋮ (tiga titik)** di sudut kanan atas.
-2. Pilih **"Script editor"**.
-3. Project Apps Script akan terbuka dan terhubung secara otomatis ke form.
-
-**Cara B — Dari Google Apps Script:**
-1. Buka [script.google.com](https://script.google.com), lalu klik **"New project"**.
-2. Saat membuat trigger, pilih form secara manual.
-
-**Langkah selanjutnya:**
-1. Hapus konten default di editor, lalu tempel seluruh kode dari file `Code.gs`.
-2. Isi nilai variabel pada baris paling atas:
+1. Di halaman form, klik **⋮ (tiga titik)** → **"Script editor"**
+2. Project Apps Script akan terbuka dan terhubung otomatis ke form
+3. Hapus konten default, tempel seluruh kode dari file `Code.gs`
+4. Isi API key pada baris paling atas:
 
 ```javascript
 const GEMINI_API_KEY = "PASTE_API_KEY_DI_SINI";
 ```
 
-3. Simpan project (`Ctrl+S` / `Cmd+S`) dan beri nama, misalnya `ML Auto-Reply`.
+5. Simpan project (`Ctrl+S` / `Cmd+S`), beri nama misalnya `ML Auto-Reply`
 
 ---
 
-### 4. Aktifkan Trigger Otomatis
+#### 4. Aktifkan Trigger Otomatis
 
-1. Di Apps Script editor, klik ikon **⏰ (Triggers)** pada sidebar kiri.
-2. Klik tombol **"+ Add Trigger"** di sudut kanan bawah.
-3. Isi konfigurasi trigger sebagai berikut:
+1. Di Apps Script editor, klik ikon **⏰ (Triggers)** pada sidebar kiri
+2. Klik **"+ Add Trigger"** di sudut kanan bawah
+3. Isi konfigurasi berikut:
 
 | Field | Nilai |
 |---|---|
-| Choose which function to run | `onFormSubmit` |
-| Choose which deployment should run | `Head` |
-| Select event source | `From form` |
-| Select event type | `On form submit` |
+| Function to run | `onFormSubmit` |
+| Deployment | `Head` |
+| Event source | `From form` |
+| Event type | `On form submit` |
 
-4. Klik **Save**.
-5. Popup izin OAuth akan muncul — klik **"Advanced"** → **"Go to [nama project]"** → **"Allow"**.
-
-> Izin yang dibutuhkan: akses ke Google Forms (membaca respons) dan Gmail (mengirim email).
+4. Klik **Save** → ikuti popup izin OAuth → klik **"Allow"**
 
 ---
 
-### 5. Uji Sistem
+#### 5. Uji Sistem
 
 **Uji manual dari editor:**
-1. Di Apps Script editor, pilih fungsi `testManual` dari dropdown.
-2. Klik tombol **▶ Run**.
-3. Buka **"View → Logs"** untuk melihat output.
-4. Periksa inbox email `test@gmail.com` (atau email yang telah diubah di fungsi `testManual`).
+1. Pilih fungsi `testManual` dari dropdown, lalu klik **▶ Run**
+2. Buka **"View → Logs"** untuk melihat output
+3. Periksa inbox email yang digunakan di fungsi `testManual`
 
 **Uji dengan form sesungguhnya:**
-1. Buka tautan form melalui **Preview** atau tombol **Send**.
-2. Isi email aktif dan pertanyaan seputar machine learning.
-3. Kirimkan form.
-4. Tunggu maksimal 1 menit — email balasan akan masuk ke inbox.
+1. Buka form melalui **Preview** atau tombol **Send**
+2. Isi email aktif dan pertanyaan machine learning
+3. Tunggu maksimal 1 menit — email balasan akan masuk inbox
 
 ---
 
-### 6. Bagikan Tautan Form
+#### 6. Bagikan Tautan Form
 
-1. Di Google Form, klik tombol **"Send"**.
-2. Pilih tab **🔗 (Link)**.
-3. Centang **"Shorten URL"** untuk mendapatkan URL yang lebih singkat.
-4. Klik **"Copy"**.
+1. Klik tombol **"Send"** → tab **🔗 (Link)**
+2. Centang **"Shorten URL"** → klik **"Copy"**
 
 Format tautan: `https://forms.gle/xxxxxxxxxx`
 
-Tautan ini dapat dibuka oleh siapa saja tanpa perlu masuk ke akun Google.
-
 ---
 
-## Struktur Kode
+### Configuration
 
-```
-Code.gs
-│
-├── GEMINI_API_KEY          — konfigurasi API key
-├── GEMINI_URL              — endpoint Gemini 1.5 Flash
-│
-├── onFormSubmit(e)         — trigger utama, entry point sistem
-├── callGemini(question)    — mengirim prompt ke Gemini dan mengembalikan jawaban
-├── sendReplyEmail(...)     — mengirim email HTML melalui GmailApp
-├── escapeHtml(text)        — sanitasi teks untuk keamanan HTML
-└── testManual()            — fungsi uji coba tanpa pengiriman form
-```
+| Variabel | Lokasi | Default | Keterangan |
+|---|---|---|---|
+| `GEMINI_API_KEY` | Baris 3 `Code.gs` | *(wajib diisi)* | API key dari Google AI Studio |
+| `maxOutputTokens` | `callGemini()` | `300` | Panjang maksimal jawaban |
+| `temperature` | `callGemini()` | `0.7` | Kreativitas jawaban (rentang 0–1) |
+| Nama pengirim | `sendReplyEmail()` | `"AI ML Assistant"` | Nama yang muncul di email balasan |
 
-### Prompt yang Digunakan
-
-```
-Jawab pertanyaan machine learning ini secara ringkas: [question]
-```
-
----
-
-## Konfigurasi
-
-| Variabel | Lokasi | Keterangan |
-|---|---|---|
-| `GEMINI_API_KEY` | baris 3 | API key dari Google AI Studio |
-| `maxOutputTokens` | `callGemini()` | Panjang maksimal jawaban (default: 300) |
-| `temperature` | `callGemini()` | Tingkat kreativitas jawaban, rentang 0–1 (default: 0.7) |
-| Nama pengirim email | `sendReplyEmail()` | Default: `"AI ML Assistant"` |
-
-Untuk mengganti model Gemini, ubah bagian URL pada variabel `GEMINI_URL`:
+**Mengganti model Gemini:**
 
 ```javascript
-// Model yang tersedia (free tier):
+// Model tersedia (free tier):
 // gemini-1.5-flash      ← cepat, hemat kuota (default)
 // gemini-1.5-flash-8b   ← lebih ringan
 // gemini-1.5-pro        ← lebih akurat, kuota lebih terbatas
@@ -209,34 +233,52 @@ Untuk mengganti model Gemini, ubah bagian URL pada variabel `GEMINI_URL`:
 
 ---
 
-## Pemecahan Masalah
+### Troubleshooting
 
 | Masalah | Kemungkinan Penyebab | Solusi |
 |---|---|---|
-| Email tidak terkirim | Izin OAuth belum diberikan | Hapus dan buat ulang trigger, lalu ulangi proses otorisasi |
+| Email tidak terkirim | Izin OAuth belum diberikan | Hapus dan buat ulang trigger, ulangi otorisasi |
 | `Gemini error 400` | API key salah atau kosong | Periksa nilai `GEMINI_API_KEY`, pastikan tidak ada spasi |
-| `namedValues` kosong | Nama field form tidak sesuai | Pastikan field form bernama persis `Your email` dan `Question` |
-| Trigger tidak aktif | Trigger terhapus atau mengalami error | Buka Triggers dan pastikan `onFormSubmit` terdaftar |
-| Jawaban tidak muncul di email | Respons Gemini kosong | Periksa Logs untuk melihat pesan error dari API |
-| Kuota Gmail terlampaui | Lebih dari 100 email per hari (akun gratis) | Gunakan akun Google Workspace atau tambahkan mekanisme throttling |
-
-Untuk melihat log error secara lengkap:
-1. Di Apps Script editor, klik **"Executions"** pada sidebar kiri.
-2. Klik eksekusi yang gagal untuk melihat stack trace secara mendetail.
+| `namedValues` kosong | Nama field form tidak sesuai | Pastikan field bernama persis `Your email` dan `Question` |
+| Trigger tidak aktif | Trigger terhapus atau error | Buka Triggers, pastikan `onFormSubmit` terdaftar |
+| Jawaban tidak muncul | Respons Gemini kosong | Buka **Executions** di sidebar untuk melihat stack trace |
 
 ---
 
-## Batasan
+## Development Notes
 
-- **Gmail:** Maksimal 100 email per hari untuk akun Google biasa (500 per hari untuk Workspace)
-- **Gemini free tier:** 1.500 request per hari, 15 request per menit untuk Gemini 1.5 Flash
-- **Apps Script:** Batas waktu eksekusi maksimal 6 menit per sesi (memadai untuk kasus penggunaan ini)
-- **Konteks percakapan:** Sistem tidak menyimpan riwayat percakapan — setiap pertanyaan diproses secara independen
+### Limitations
+
+| Komponen | Batasan |
+|---|---|
+| Gmail (akun gratis) | Maks. 100 email/hari (500/hari untuk Workspace) |
+| Gemini free tier | 1.500 request/hari, 15 request/menit |
+| Apps Script | Batas eksekusi 6 menit per sesi |
+| Konteks percakapan | Tidak ada — setiap pertanyaan diproses independen |
+
+### Future Development
+
+Beberapa pengembangan yang dapat dilakukan ke depan:
+
+- [ ] **Multi-language support** — deteksi bahasa pertanyaan dan jawab sesuai bahasa pengguna
+- [ ] **Conversation history** — menyimpan riwayat tanya jawab per pengguna di Google Sheets
+- [ ] **Topic filtering** — validasi agar hanya pertanyaan ML yang diproses
+- [ ] **Dashboard monitoring** — laporan harian via Google Sheets tentang jumlah pertanyaan dan status pengiriman
+- [ ] **Rate limiting** — mekanisme throttling agar tidak melampaui kuota Gmail
 
 ---
 
-<p align="center">
-  <b>Pengembangan dari tim StarLive SAINT</b>
-</p>
+## Author
 
-<p align="center">Danny Aulia · Said Hasan Hanafiah · Noah Von Nobelius · Arvian Raveindra Pradana</p>
+Dikembangkan oleh tim **StarLive SAINT**
+
+| Nama |
+|---|
+| Danny Aulia |
+| Said Hasan Hanafiah |
+| Noah Von Nobelius |
+| Arvian Raveindra Pradana |
+
+---
+
+<p align="center"><i>METI Government of Japan — AI and Tech Internship 2025</i></p>
