@@ -32,7 +32,6 @@ Proyek ini dikembangkan sebagai solusi untuk tes seleksi **METI Government of Ja
 
 Setiap kali pengguna mengisi Google Form, sistem langsung memproses pertanyaan dan mengirimkan jawaban berformat HTML ke alamat email yang telah diisi, dalam waktu kurang dari 1 menit.
 
-> **📝 Notes**
 > *Proyek ini merupakan pertanyaan pada tes seleksi METI Government of Japan — AI and Tech Internship 2025*
 
 ---
