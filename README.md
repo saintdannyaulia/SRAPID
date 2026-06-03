@@ -1,8 +1,11 @@
 # 🤖 StarLive Response Automation via Prompt Integrated Data
 
-[![JavaScript](https://img.shields.io/badge/Javascript-App-yellow?logo=javascript)](https://javascript.com)
-[![Platform](https://img.shields.io/badge/Platform-Google%20Apps%20Script-blue?logo=google)](https://script.google.com)
-[![AI](https://img.shields.io/badge/AI-Gemini%201.5%20Flash-orange?logo=google)](https://aistudio.google.com)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)](https://javascript.com)
+[![Google Apps Script](https://img.shields.io/badge/Google%20Apps%20Script-4285F4?logo=google&logoColor=white)](https://script.google.com)
+[![Google Gemini](https://img.shields.io/badge/Gemini%201.5%20Flash-886FBF?logo=googlegemini&logoColor=white)](https://aistudio.google.com)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?logo=gmail&logoColor=white)](https://mail.google.com)
+[![Google Forms](https://img.shields.io/badge/Google%20Forms-7248B9?logo=googleforms&logoColor=white)](https://forms.google.com)
+[![License](https://img.shields.io/badge/License-MIT-22c55e?logo=opensourceinitiative&logoColor=white)](LICENSE)
 
 ---
 
@@ -61,46 +64,18 @@ Setiap kali pengguna mengisi Google Form, sistem langsung memproses pertanyaan d
 ### Flowchart
 
 ```
-┌─────────────────┐
-│  User mengisi   │
-│  Google Form    │
-│ (email + soal)  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Trigger aktif  │
-│  onFormSubmit   │
-│  (Apps Script)  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Kirim prompt   │
-│  ke Gemini API  │
-│  (callGemini)   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Gemini          │
-│  menghasilkan   │
-│  jawaban AI     │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Kirim email    │
-│  HTML balasan   │
-│  via GmailApp   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Email masuk    │
-│  inbox user     │
-│  < 1 menit ✅   │
-└─────────────────┘
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  User mengisi   │     │  Trigger aktif   │     │  Kirim prompt   │
+│  Google Form    │────▶│  onFormSubmit    │────▶│  ke Gemini API  │
+│ (email + soal)  │     │  (Apps Script)   │     │  (callGemini)   │
+└─────────────────┘     └──────────────────┘     └────────┬────────┘
+                                                           │
+                                                           ▼
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  Email masuk    │     │  Kirim email     │     │  Gemini         │
+│  inbox user     │◀────│  HTML balasan    │◀────│  menghasilkan   │
+│  < 1 menit ✅   │     │  via GmailApp    │     │  jawaban AI     │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
 ```
 
 ### Penjelasan
