@@ -33,8 +33,7 @@ Proyek ini dikembangkan sebagai solusi untuk tes seleksi **METI Government of Ja
 Setiap kali pengguna mengisi Google Form, sistem langsung memproses pertanyaan dan mengirimkan jawaban berformat HTML ke alamat email yang telah diisi, dalam waktu kurang dari 1 menit.
 
 > **📝 Notes**
-> <!-- Tambahkan catatan tambahan, konteks proyek, atau informasi relevan lainnya di sini -->
-> <!-- Contoh: versi, kondisi khusus, atau hal yang perlu diketahui pembaca sebelum lanjut -->
+> <!-- Proyek ini merupakan pertanyaan pada tes seleksi METI Government of Japan — AI and Tech Internship 2025 -->
 
 ---
 
@@ -246,6 +245,4 @@ Beberapa pengembangan yang dapat dilakukan ke depan:
   <b>Pengembangan dari tim StarLive SAINT</b>
 </p>
 
-<p align="center">Danny Aulia · Said Hasan Hanafiah · Noah Von Nobelius · Arvian Raveindra Pradana</p>
-
-<p align="center"><i>METI Government of Japan — AI and Tech Internship 2025</i></p>
+<p align="center"><i>Danny Aulia · Said Hasan Hanafiah · Noah Von Nobelius · Arvian Raveindra Pradana</i></p>
