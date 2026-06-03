@@ -3,11 +3,10 @@
 [![JavaScript](https://img.shields.io/badge/Javascript-App-yellow?logo=javascript)](https://javascript.com)
 [![Platform](https://img.shields.io/badge/Platform-Google%20Apps%20Script-blue?logo=google)](https://script.google.com)
 [![AI](https://img.shields.io/badge/AI-Gemini%201.5%20Flash-orange?logo=google)](https://aistudio.google.com)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
-## Daftar Isi
+## Directory
 
 - [Overview](#overview)
 - [Features & Tech Stack](#features--tech-stack)
