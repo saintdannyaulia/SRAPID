@@ -267,17 +267,10 @@ Beberapa pengembangan yang dapat dilakukan ke depan:
 
 ---
 
-## Author
+<p align="center">
+  <b>Pengembangan dari tim StarLive SAINT</b>
+</p>
 
-Dikembangkan oleh tim **StarLive SAINT**
-
-| Nama |
-|---|
-| Danny Aulia |
-| Said Hasan Hanafiah |
-| Noah Von Nobelius |
-| Arvian Raveindra Pradana |
-
----
+<p align="center">Danny Aulia · Said Hasan Hanafiah · Noah Von Nobelius · Arvian Raveindra Pradana</p>
 
 <p align="center"><i>METI Government of Japan — AI and Tech Internship 2025</i></p>
