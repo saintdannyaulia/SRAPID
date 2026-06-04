@@ -5,7 +5,6 @@
 [![Google Gemini](https://img.shields.io/badge/Gemini%201.5%20Flash-886FBF?logo=googlegemini&logoColor=white)](https://aistudio.google.com)
 [![Gmail](https://img.shields.io/badge/Gmail-D14836?logo=gmail&logoColor=white)](https://mail.google.com)
 [![Google Forms](https://img.shields.io/badge/Google%20Forms-7248B9?logo=googleforms&logoColor=white)](https://forms.google.com)
-[![License](https://img.shields.io/badge/License-MIT-22c55e?logo=opensourceinitiative&logoColor=white)](LICENSE)
 
 ---
 
