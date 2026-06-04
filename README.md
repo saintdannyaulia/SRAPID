@@ -27,7 +27,7 @@
 
 ## Overview
 
-Proyek ini dikembangkan sebagai solusi untuk tes seleksi **METI Government of Japan — AI and Tech Internship 2025**. Sistem dirancang untuk merespons pertanyaan seputar *machine learning* secara otomatis tanpa memerlukan infrastruktur server maupun biaya hosting — seluruhnya berjalan di atas ekosistem Google menggunakan **Gemini AI** dan **Google Apps Script**.
+Proyek ini dikembangkan sebagai jawaban pada tes seleksi **METI Government of Japan — AI and Tech Internship 2025**. Sistem dirancang untuk merespons pertanyaan seputar *machine learning* secara otomatis tanpa memerlukan infrastruktur server maupun biaya hosting — seluruhnya berjalan di atas ekosistem Google menggunakan **Gemini AI** dan **Google Apps Script**.
 
 Setiap kali pengguna mengisi Google Form, sistem langsung memproses pertanyaan dan mengirimkan jawaban berformat HTML ke alamat email yang telah diisi, dalam waktu kurang dari 1 menit.
 
