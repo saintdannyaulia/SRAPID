@@ -76,7 +76,7 @@ Setiap kali pengguna mengisi Google Form, sistem langsung memproses pertanyaan d
 └─────────────────┘     └──────────────────┘     └─────────────────┘
 ```
 
-### Penjelasan
+### Explanation
 
 | Langkah | Proses | Keterangan |
 |---|---|---|
